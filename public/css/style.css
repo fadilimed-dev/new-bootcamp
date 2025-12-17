@@ -1,286 +1,255 @@
 /**
- * public/css/style.css - Stylesheet
- * 
- * This file contains all CSS styles for the soccer jersey store.
- * It provides a modern, clean, and responsive design.
+ * Main Stylesheet
+ * Simple, minimal CSS for the African Soccer Jersey Store
+ * MVP design focused on functionality and readability
  */
 
-/* ============================================
-   GLOBAL STYLES & RESET
-   ============================================ */
-
-/* Reset default browser styles for consistent appearance */
+/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Include padding and border in element width */
+  box-sizing: border-box;
 }
 
-/* Set base font and color for entire site */
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
-  line-height: 1.6; /* Improve readability */
-  color: #333; /* Dark gray text color */
-  background-color: #f5f5f5; /* Light gray background */
-  min-height: 100vh; /* Ensure body takes full viewport height */
-  display: flex;
-  flex-direction: column; /* Stack header, main, footer vertically */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  background-color: #f5f5f5;
 }
 
-/* ============================================
-   CONTAINER & LAYOUT
-   ============================================ */
+/* Header styles */
+header {
+  background-color: #2c3e50;
+  color: white;
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-/* Container class for consistent max-width and centering */
-.container {
-  max-width: 1200px; /* Maximum width of content */
-  margin: 0 auto; /* Center container horizontally */
-  padding: 0 20px; /* Horizontal padding */
-  width: 100%; /* Full width up to max-width */
+.logo-container {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  display: inline-block;
+}
+
+nav {
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+nav a:hover {
+  background-color: #34495e;
 }
 
 /* Main content area */
 main {
-  flex: 1; /* Take remaining space between header and footer */
-  padding: 40px 0; /* Vertical padding */
+  min-height: calc(100vh - 200px);
+  padding: 2rem;
 }
 
-/* ============================================
-   HEADER & NAVIGATION
-   ============================================ */
-
-/* Header background and styling */
-header {
-  background-color: #1a1a1a; /* Dark background */
-  color: white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* Navigation bar */
-.navbar {
-  padding: 1rem 0; /* Vertical padding */
-}
-
-.navbar .container {
-  display: flex; /* Flexbox layout */
-  justify-content: space-between; /* Space between logo and nav links */
-  align-items: center; /* Vertically center items */
-}
-
-/* Logo styling */
-.logo a {
-  font-size: 1.5rem; /* Larger font size */
-  font-weight: bold;
-  color: white;
-  text-decoration: none; /* Remove underline */
-  transition: color 0.3s; /* Smooth color transition on hover */
-}
-
-.logo a:hover {
-  color: #4CAF50; /* Green color on hover */
-}
-
-/* Navigation links list */
-.nav-links {
-  display: flex; /* Horizontal layout */
-  list-style: none; /* Remove bullet points */
-  gap: 2rem; /* Space between links */
-}
-
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
-}
-
-.nav-links a:hover {
-  color: #4CAF50; /* Green on hover */
-}
-
-/* ============================================
-   TYPOGRAPHY
-   ============================================ */
-
-/* Main page heading */
+/* Page headings */
 h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: #1a1a1a;
-}
-
-/* Subtitle text */
-.subtitle {
-  font-size: 1.1rem;
-  color: #666;
+  color: #2c3e50;
   margin-bottom: 2rem;
+  text-align: center;
 }
 
-/* ============================================
-   JERSEY GRID (HOMEPAGE)
-   ============================================ */
-
-/* Grid container for jersey cards */
-.jerseys-grid {
+/* Jersey grid (homepage) */
+.jersey-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
-  gap: 2rem; /* Space between cards */
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
   margin-top: 2rem;
 }
 
-/* Individual jersey card */
 .jersey-card {
   background: white;
-  border-radius: 8px; /* Rounded corners */
-  overflow: hidden; /* Hide image overflow */
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Card shadow */
-  transition: transform 0.3s, box-shadow 0.3s; /* Smooth animations */
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
 .jersey-card:hover {
-  transform: translateY(-5px); /* Lift card on hover */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Jersey image container */
 .jersey-image {
   width: 100%;
-  height: 300px;
+  height: 250px;
   overflow: hidden;
-  background-color: #f0f0f0; /* Placeholder background */
+  background-color: #ecf0f1;
 }
 
 .jersey-image img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Cover entire container, maintain aspect ratio */
+  object-fit: cover;
 }
 
-/* Jersey information section */
 .jersey-info {
   padding: 1.5rem;
 }
 
 .jersey-info h3 {
-  font-size: 1.3rem;
+  color: #2c3e50;
   margin-bottom: 0.5rem;
-  color: #1a1a1a;
+  font-size: 1.25rem;
 }
 
-.jersey-info .team {
-  color: #666;
-  font-size: 1rem;
+.country {
+  color: #7f8c8d;
   margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
-.jersey-info .price {
+.price {
+  color: #27ae60;
   font-size: 1.5rem;
   font-weight: bold;
-  color: #4CAF50; /* Green price color */
+  margin: 1rem 0;
+}
+
+/* Buttons */
+.btn-view, .btn-back, .btn-add, .btn-edit, .btn-delete, .btn-submit, .btn-cancel {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.btn-view {
+  background-color: #3498db;
+  color: white;
+  width: 100%;
+}
+
+.btn-view:hover {
+  background-color: #2980b9;
+}
+
+.btn-back {
+  background-color: #95a5a6;
+  color: white;
   margin-bottom: 1rem;
 }
 
-/* ============================================
-   JERSEY DETAIL PAGE
-   ============================================ */
-
-/* Back link styling */
-.back-link {
-  display: inline-block;
-  margin-bottom: 2rem;
-  color: #4CAF50;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.3s;
+.btn-back:hover {
+  background-color: #7f8c8d;
 }
 
-.back-link:hover {
-  color: #45a049; /* Darker green on hover */
+.btn-add {
+  background-color: #27ae60;
+  color: white;
+  margin-top: 1rem;
 }
 
-/* Jersey detail container */
+.btn-add:hover {
+  background-color: #229954;
+}
+
+/* Jersey detail page */
 .jersey-detail {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  grid-template-columns: 1fr 1fr;
   gap: 3rem;
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 2rem;
 }
 
-/* Jersey detail image */
-.jersey-detail-image {
+.detail-image {
   width: 100%;
 }
 
-.jersey-detail-image img {
+.detail-image img {
   width: 100%;
   height: auto;
   border-radius: 8px;
 }
 
-/* Jersey detail information */
-.jersey-detail-info h1 {
-  font-size: 2rem;
+.detail-info h1 {
+  text-align: left;
   margin-bottom: 1rem;
 }
 
-.team-label {
-  color: #666;
-  font-size: 0.9rem;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.team-name {
-  font-size: 1.5rem;
-  color: #1a1a1a;
+.country-label {
+  font-size: 1.1rem;
   margin-bottom: 1rem;
-}
-
-.price-label {
-  color: #666;
-  font-size: 0.9rem;
-  margin-top: 1rem;
-  margin-bottom: 0.5rem;
+  color: #7f8c8d;
 }
 
 .price-large {
   font-size: 2.5rem;
+  color: #27ae60;
   font-weight: bold;
-  color: #4CAF50;
-  margin-bottom: 1rem;
+  margin: 1.5rem 0;
 }
 
-.meta-info {
-  color: #999;
-  font-size: 0.9rem;
-  margin-top: 2rem;
-}
-
-/* Action buttons container */
-.actions {
+.detail-actions {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
 }
 
-/* ============================================
-   ADD JERSEY FORM
-   ============================================ */
+.btn-edit {
+  background-color: #f39c12;
+  color: white;
+}
 
-/* Form container */
-.add-jersey-form {
+.btn-edit:hover {
+  background-color: #e67e22;
+}
+
+.btn-delete {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+}
+
+.delete-form {
+  display: inline;
+}
+
+/* Admin form */
+.admin-form {
   background: white;
   padding: 2rem;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px; /* Limit form width */
-  margin: 0 auto; /* Center form */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  max-width: 600px;
+  margin: 2rem auto;
 }
 
-/* Form group (label + input) */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -288,185 +257,100 @@ h1 {
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
+  color: #2c3e50;
   font-weight: 600;
-  color: #1a1a1a;
 }
 
 .form-group input {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 4px;
   font-size: 1rem;
-  transition: border-color 0.3s;
 }
 
 .form-group input:focus {
-  outline: none; /* Remove default outline */
-  border-color: #4CAF50; /* Green border on focus */
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
 }
 
 .form-group small {
   display: block;
-  margin-top: 0.5rem;
-  color: #666;
-  font-size: 0.9rem;
+  margin-top: 0.25rem;
+  color: #7f8c8d;
+  font-size: 0.875rem;
 }
 
-/* Form actions (buttons) */
 .form-actions {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
 }
 
-.back-link-container {
-  text-align: center;
-  margin-top: 2rem;
+.btn-submit {
+  background-color: #27ae60;
+  color: white;
+  flex: 1;
 }
 
-/* ============================================
-   BUTTONS
-   ============================================ */
-
-/* Base button styles */
-.btn {
-  display: inline-block;
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  font-weight: 600;
-  text-decoration: none;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
+.btn-submit:hover {
+  background-color: #229954;
 }
 
-.btn-primary {
-  background-color: #4CAF50; /* Green background */
+.btn-cancel {
+  background-color: #95a5a6;
   color: white;
 }
 
-.btn-primary:hover {
-  background-color: #45a049; /* Darker green on hover */
-  transform: translateY(-2px); /* Slight lift */
+.btn-cancel:hover {
+  background-color: #7f8c8d;
 }
 
-.btn-secondary {
-  background-color: #666;
-  color: white;
-}
-
-.btn-secondary:hover {
-  background-color: #555; /* Darker gray on hover */
-}
-
-/* ============================================
-   EMPTY STATE & ERROR MESSAGES
-   ============================================ */
-
-/* Empty state (no jerseys) */
-.empty-state {
+/* No jerseys message */
+.no-jerseys {
   text-align: center;
   padding: 3rem;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* Error message box */
-.error-box {
-  background-color: #ffebee; /* Light red background */
-  border: 2px solid #f44336; /* Red border */
-  border-radius: 4px;
-  padding: 1rem;
-  margin-bottom: 2rem;
-}
-
-.error-box h3 {
-  color: #c62828; /* Dark red */
-  margin-bottom: 0.5rem;
-}
-
-.error-box ul {
-  list-style-position: inside;
-  color: #c62828;
-}
-
+/* Error message */
 .error-message {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
-/* ============================================
-   FOOTER
-   ============================================ */
-
-/* Footer styling */
+/* Footer */
 footer {
-  background-color: #1a1a1a;
+  background-color: #2c3e50;
   color: white;
   text-align: center;
-  padding: 2rem 0;
-  margin-top: auto; /* Push footer to bottom */
+  padding: 1.5rem;
+  margin-top: 3rem;
 }
 
-footer p {
-  margin: 0;
-}
-
-/* ============================================
-   RESPONSIVE DESIGN
-   ============================================ */
-
-/* Tablet and smaller screens */
+/* Responsive design */
 @media (max-width: 768px) {
   .jersey-detail {
-    grid-template-columns: 1fr; /* Single column on mobile */
+    grid-template-columns: 1fr;
   }
-
-  .navbar .container {
-    flex-direction: column; /* Stack logo and nav vertically */
-    gap: 1rem;
-  }
-
-  .nav-links {
-    gap: 1rem;
-  }
-
-  h1 {
-    font-size: 2rem; /* Smaller heading on mobile */
-  }
-
-  .jerseys-grid {
-    grid-template-columns: 1fr; /* Single column on mobile */
-  }
-
-  .form-actions {
-    flex-direction: column; /* Stack buttons vertically */
-  }
-
-  .actions {
+  
+  .detail-actions {
     flex-direction: column;
   }
-}
-
-/* Mobile screens */
-@media (max-width: 480px) {
-  .container {
-    padding: 0 15px; /* Less padding on mobile */
+  
+  .jersey-grid {
+    grid-template-columns: 1fr;
   }
-
-  main {
-    padding: 20px 0;
-  }
-
-  .add-jersey-form {
-    padding: 1.5rem;
+  
+  nav a {
+    display: block;
+    margin: 0.5rem 0;
   }
 }
 

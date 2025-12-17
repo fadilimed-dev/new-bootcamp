@@ -1,0 +1,75 @@
+<!-- Admin View -->
+<!-- This page contains a form to add new jerseys or edit existing ones -->
+
+<div class="container">
+  <!-- Page heading -->
+  <!-- If jersey exists, we're editing; otherwise, we're adding new -->
+  <h1>{{#if jersey}}Edit Jersey{{else}}Add New Jersey{{/if}}</h1>
+  
+  <!-- Back to home link -->
+  <a href="/" class="btn-back">← Back to Store</a>
+  
+  <!-- Admin form -->
+  <!-- If editing, form submits to PUT /admin/:id; if adding, submits to POST /admin -->
+  <form action="/admin{{#if jersey}}/{{jersey._id}}?_method=PUT{{/if}}" method="POST" class="admin-form">
+    
+    <!-- Team Name Input -->
+    <div class="form-group">
+      <label for="team">Team Name *</label>
+      <input type="text" 
+             id="team" 
+             name="team" 
+             value="{{#if jersey}}{{jersey.team}}{{/if}}"
+             placeholder="e.g., Super Eagles"
+             required>
+      <small>Enter the team name (e.g., Super Eagles, Indomitable Lions)</small>
+    </div>
+    
+    <!-- Country Input -->
+    <div class="form-group">
+      <label for="country">Country *</label>
+      <input type="text" 
+             id="country" 
+             name="country" 
+             value="{{#if jersey}}{{jersey.country}}{{/if}}"
+             placeholder="e.g., Nigeria"
+             required>
+      <small>Enter the country name</small>
+    </div>
+    
+    <!-- Price Input -->
+    <div class="form-group">
+      <label for="price">Price (USD) *</label>
+      <input type="number" 
+             id="price" 
+             name="price" 
+             value="{{#if jersey}}{{jersey.price}}{{/if}}"
+             placeholder="e.g., 49.99"
+             min="0"
+             step="0.01"
+             required>
+      <small>Enter the price in USD</small>
+    </div>
+    
+    <!-- Image URL Input -->
+    <div class="form-group">
+      <label for="imageUrl">Image URL *</label>
+      <input type="url" 
+             id="imageUrl" 
+             name="imageUrl" 
+             value="{{#if jersey}}{{jersey.imageUrl}}{{/if}}"
+             placeholder="https://example.com/jersey-image.jpg"
+             required>
+      <small>Enter the full URL to the jersey image</small>
+    </div>
+    
+    <!-- Submit Button -->
+    <div class="form-actions">
+      <button type="submit" class="btn-submit">
+        {{#if jersey}}Update Jersey{{else}}Add Jersey{{/if}}
+      </button>
+      <a href="/" class="btn-cancel">Cancel</a>
+    </div>
+  </form>
+</div>
+

@@ -1,157 +1,183 @@
 /**
- * routes/jerseys.js - Jersey Routes and Controllers
- * 
- * This file handles all HTTP routes related to soccer jerseys.
- * It follows the MVC pattern where this file acts as both routes and controllers.
- * 
- * Routes defined:
- * - GET  /           - Homepage (list all jerseys)
- * - GET  /jersey/:id - View single jersey details
- * - GET  /add        - Show form to add new jersey
- * - POST /add        - Process form submission to create new jersey
+ * Jersey Routes
+ * Handles all HTTP requests related to jerseys (CRUD operations)
  */
 
-// Import required modules
-const express = require('express'); // Express Router for defining routes
-const router = express.Router(); // Create a new router instance
-
-// Import the Jersey model to interact with the database
+const express = require('express');
+const router = express.Router();
 const Jersey = require('../models/Jersey');
 
 /**
- * GET / - Homepage Route
- * 
- * This route displays the homepage with a list of all soccer jerseys.
- * It fetches all jerseys from MongoDB and renders them in the home.hbs template.
+ * GET / (Homepage)
+ * Displays all jerseys in the store
  */
 router.get('/', async (req, res) => {
   try {
     // Fetch all jerseys from the database
-    // find() with empty object {} returns all documents
-    // sort({ createdAt: -1 }) sorts by creation date, newest first
-    const jerseys = await Jersey.find({}).sort({ createdAt: -1 });
-
-    // Render the 'home' view template with the jerseys data
-    // The second argument is an object containing data to pass to the template
+    // The empty object {} means "get all documents"
+    const jerseys = await Jersey.find({}).sort({ createdAt: -1 }); // Sort by newest first
+    
+    // Render the 'home' view with the jerseys data
     res.render('home', {
-      title: 'Soccer Jersey Store', // Page title
-      jerseys: jerseys // Array of jersey objects to display
+      title: 'African Soccer Jersey Store',
+      jerseys: jerseys // Pass jerseys to the template
     });
   } catch (error) {
-    // If an error occurs (e.g., database connection issue), log it and show error page
+    // If there's an error, log it and send a 500 error response
     console.error('Error fetching jerseys:', error);
-    res.status(500).render('error', {
-      title: 'Error',
-      message: 'Failed to load jerseys. Please try again later.'
-    });
+    res.status(500).send('Error loading jerseys');
   }
 });
 
 /**
- * GET /jersey/:id - Jersey Detail Route
- * 
- * This route displays detailed information about a specific jersey.
- * :id is a route parameter that captures the jersey's MongoDB _id.
- * Example: /jersey/507f1f77bcf86cd799439011
+ * GET /jersey/:id
+ * Displays detailed information about a specific jersey
+ * :id is a route parameter that represents the jersey's MongoDB _id
  */
 router.get('/jersey/:id', async (req, res) => {
   try {
-    // Extract the jersey ID from the URL parameter
-    // req.params.id contains the value of :id from the URL
-    const jerseyId = req.params.id;
-
-    // Find the jersey by its ID in the database
-    // findById() is a Mongoose method that finds a document by _id
-    const jersey = await Jersey.findById(jerseyId);
-
-    // Check if jersey was found
+    // Find the jersey by its ID
+    // req.params.id contains the ID from the URL
+    const jersey = await Jersey.findById(req.params.id);
+    
+    // If jersey doesn't exist, return 404
     if (!jersey) {
-      // If no jersey found, return 404 error
-      return res.status(404).render('error', {
-        title: 'Jersey Not Found',
-        message: 'The jersey you are looking for does not exist.'
+      return res.status(404).render('404', {
+        title: 'Jersey Not Found'
       });
     }
-
-    // Render the 'jersey' view template with the jersey data
-    res.render('jersey', {
-      title: jersey.name, // Page title is the jersey name
-      jersey: jersey // The jersey object with all its details
+    
+    // Render the 'detail' view with the jersey data
+    res.render('detail', {
+      title: `${jersey.team} - ${jersey.country}`,
+      jersey: jersey
     });
   } catch (error) {
-    // Handle errors (e.g., invalid ID format, database error)
     console.error('Error fetching jersey:', error);
-    res.status(500).render('error', {
-      title: 'Error',
-      message: 'Failed to load jersey details. Please try again later.'
-    });
+    res.status(500).send('Error loading jersey details');
   }
 });
 
 /**
- * GET /add - Show Add Jersey Form
- * 
- * This route displays a form where users can add a new jersey.
- * It only renders the form page, it doesn't process any data.
+ * GET /admin
+ * Displays the admin form for adding/editing jerseys
+ * If an ID is provided as a query parameter, it loads that jersey for editing
  */
-router.get('/add', (req, res) => {
-  // Render the 'add' view template (the form)
-  res.render('add', {
-    title: 'Add New Jersey' // Page title
-  });
+router.get('/admin', async (req, res) => {
+  try {
+    let jersey = null;
+    
+    // Check if an ID was provided in the query string (e.g., /admin?id=123)
+    if (req.query.id) {
+      jersey = await Jersey.findById(req.query.id);
+      
+      // If jersey not found, redirect to admin page without ID
+      if (!jersey) {
+        return res.redirect('/admin');
+      }
+    }
+    
+    // Render the admin form
+    // If jersey exists, it's in edit mode; otherwise, it's in add mode
+    res.render('admin', {
+      title: 'Admin - Manage Jerseys',
+      jersey: jersey // Pass jersey if editing, null if adding new
+    });
+  } catch (error) {
+    console.error('Error loading admin page:', error);
+    res.status(500).send('Error loading admin page');
+  }
 });
 
 /**
- * POST /add - Process Add Jersey Form Submission
- * 
- * This route handles the form submission when a user adds a new jersey.
- * It receives the form data, validates it, saves it to MongoDB, and redirects.
+ * POST /admin
+ * Creates a new jersey in the database
+ * This route is called when the admin form is submitted to add a new jersey
  */
-router.post('/add', async (req, res) => {
+router.post('/admin', async (req, res) => {
   try {
-    // Extract form data from the request body
-    // req.body contains the form fields (name, team, price, imageUrl)
-    // This is available because we use express.urlencoded() middleware in app.js
-    const { name, team, price, imageUrl } = req.body;
-
-    // Create a new jersey document in the database
-    // Jersey.create() is a Mongoose method that creates and saves a new document
-    // It automatically validates the data against the schema defined in models/Jersey.js
-    const newJersey = await Jersey.create({
-      name: name, // Jersey name from form
-      team: team, // Team name from form
-      price: parseFloat(price), // Convert price string to number
-      imageUrl: imageUrl // Image URL from form
+    // Extract data from the form submission (req.body contains form data)
+    const { team, country, price, imageUrl } = req.body;
+    
+    // Create a new jersey document using the Jersey model
+    const newJersey = new Jersey({
+      team: team,
+      country: country,
+      price: parseFloat(price), // Convert string to number
+      imageUrl: imageUrl
     });
-
-    // After successful creation, redirect to the homepage
-    // This prevents form resubmission on page refresh
+    
+    // Save the jersey to the database
+    await newJersey.save();
+    
+    // Redirect to homepage after successful creation
     res.redirect('/');
   } catch (error) {
-    // Handle validation errors or database errors
     console.error('Error creating jersey:', error);
-
-    // Check if it's a validation error (from Mongoose schema)
-    if (error.name === 'ValidationError') {
-      // Extract error messages from validation errors
-      const errors = Object.values(error.errors).map(err => err.message);
-      
-      // Re-render the form with error messages
-      return res.render('add', {
-        title: 'Add New Jersey',
-        errors: errors, // Pass errors to template
-        formData: req.body // Keep form data so user doesn't lose their input
-      });
-    }
-
-    // For other errors, show generic error page
-    res.status(500).render('error', {
-      title: 'Error',
-      message: 'Failed to create jersey. Please try again later.'
-    });
+    res.status(500).send('Error creating jersey');
   }
 });
 
-// Export the router so it can be used in app.js
+/**
+ * PUT /admin/:id
+ * Updates an existing jersey in the database
+ * :id is the jersey's MongoDB _id
+ * This route is called when the admin form is submitted to update a jersey
+ */
+router.put('/admin/:id', async (req, res) => {
+  try {
+    // Extract data from the form submission
+    const { team, country, price, imageUrl } = req.body;
+    
+    // Find the jersey by ID and update it with new data
+    // { new: true } returns the updated document instead of the original
+    const updatedJersey = await Jersey.findByIdAndUpdate(
+      req.params.id,
+      {
+        team: team,
+        country: country,
+        price: parseFloat(price), // Convert string to number
+        imageUrl: imageUrl
+      },
+      { new: true } // Return the updated document
+    );
+    
+    // If jersey not found, return 404
+    if (!updatedJersey) {
+      return res.status(404).send('Jersey not found');
+    }
+    
+    // Redirect to the jersey detail page after successful update
+    res.redirect(`/jersey/${updatedJersey._id}`);
+  } catch (error) {
+    console.error('Error updating jersey:', error);
+    res.status(500).send('Error updating jersey');
+  }
+});
+
+/**
+ * DELETE /admin/:id
+ * Deletes a jersey from the database
+ * :id is the jersey's MongoDB _id
+ */
+router.delete('/admin/:id', async (req, res) => {
+  try {
+    // Find and delete the jersey by ID
+    const deletedJersey = await Jersey.findByIdAndDelete(req.params.id);
+    
+    // If jersey not found, return 404
+    if (!deletedJersey) {
+      return res.status(404).send('Jersey not found');
+    }
+    
+    // Redirect to homepage after successful deletion
+    res.redirect('/');
+  } catch (error) {
+    console.error('Error deleting jersey:', error);
+    res.status(500).send('Error deleting jersey');
+  }
+});
+
+// Export the router so it can be used in server.js
 module.exports = router;
 

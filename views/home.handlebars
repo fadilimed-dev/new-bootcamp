@@ -1,0 +1,49 @@
+<!-- Homepage View -->
+<!-- This page displays all available jerseys in a grid layout -->
+
+<div class="container">
+  <!-- Page heading -->
+  <h1>African Soccer Jerseys</h1>
+  
+  <!-- Check if there are any jerseys to display -->
+  {{#if jerseys}}
+    <!-- If jerseys exist, display them in a grid -->
+    <div class="jersey-grid">
+      <!-- Loop through each jersey in the jerseys array -->
+      {{#each jerseys}}
+        <div class="jersey-card">
+          <!-- Jersey image -->
+          <!-- If imageUrl exists, display it; otherwise show a placeholder -->
+          <div class="jersey-image">
+            <img src="{{this.imageUrl}}" 
+                 alt="{{this.team}} jersey" 
+                 onerror="this.src='/images/placeholder-jersey.png'">
+          </div>
+          
+          <!-- Jersey information -->
+          <div class="jersey-info">
+            <!-- Team name -->
+            <h3>{{this.team}}</h3>
+            
+            <!-- Country name -->
+            <p class="country">{{this.country}}</p>
+            
+            <!-- Price formatted as currency -->
+            <p class="price">${{this.price}}</p>
+            
+            <!-- Link to jersey detail page -->
+            <!-- The /jersey/:id route will show full details -->
+            <a href="/jersey/{{this._id}}" class="btn-view">View Details</a>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <!-- If no jerseys exist, show a message -->
+    <div class="no-jerseys">
+      <p>No jerseys available at the moment.</p>
+      <a href="/admin" class="btn-add">Add Your First Jersey</a>
+    </div>
+  {{/if}}
+</div>
+
