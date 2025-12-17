@@ -1,0 +1,65 @@
+{{!-- 
+  views/layouts/main.hbs - Main Layout Template
+  
+  This is the base layout template that wraps all other views.
+  It defines the overall HTML structure, navigation, and common elements.
+  Other templates (home.hbs, jersey.hbs, add.hbs) will be inserted into {{{body}}}.
+  
+  Handlebars syntax:
+  - {{variable}} - Outputs escaped HTML (safe)
+  - {{{variable}}} - Outputs raw HTML (use with caution)
+  - {{#if condition}} ... {{/if}} - Conditional rendering
+  - {{#each array}} ... {{/each}} - Loop through arrays
+--}}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {{!-- Meta tags for character encoding and responsive design --}}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  {{!-- Page title - dynamically set by each route --}}
+  <title>{{title}} - Soccer Jersey Store</title>
+  
+  {{!-- Link to external CSS stylesheet --}}
+  {{!-- The /css/style.css path is served from the public directory --}}
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  {{!-- Header section with site navigation --}}
+  <header>
+    <nav class="navbar">
+      <div class="container">
+        {{!-- Site logo/title --}}
+        <div class="logo">
+          <a href="/">⚽ Soccer Jersey Store</a>
+        </div>
+        
+        {{!-- Navigation menu --}}
+        <ul class="nav-links">
+          {{!-- Home link - always visible --}}
+          <li><a href="/">Home</a></li>
+          
+          {{!-- Add Jersey link - always visible --}}
+          <li><a href="/add">Add Jersey</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  {{!-- Main content area --}}
+  {{!-- {{{body}}} is where the content from other templates (home.hbs, etc.) will be inserted --}}
+  <main class="container">
+    {{{body}}}
+  </main>
+
+  {{!-- Footer section --}}
+  <footer>
+    <div class="container">
+      <p>&copy; 2024 Soccer Jersey Store. Built with Node.js, Express, MongoDB, and Handlebars.</p>
+    </div>
+  </footer>
+</body>
+</html>
+

@@ -1,0 +1,472 @@
+/**
+ * public/css/style.css - Stylesheet
+ * 
+ * This file contains all CSS styles for the soccer jersey store.
+ * It provides a modern, clean, and responsive design.
+ */
+
+/* ============================================
+   GLOBAL STYLES & RESET
+   ============================================ */
+
+/* Reset default browser styles for consistent appearance */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Include padding and border in element width */
+}
+
+/* Set base font and color for entire site */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font stack */
+  line-height: 1.6; /* Improve readability */
+  color: #333; /* Dark gray text color */
+  background-color: #f5f5f5; /* Light gray background */
+  min-height: 100vh; /* Ensure body takes full viewport height */
+  display: flex;
+  flex-direction: column; /* Stack header, main, footer vertically */
+}
+
+/* ============================================
+   CONTAINER & LAYOUT
+   ============================================ */
+
+/* Container class for consistent max-width and centering */
+.container {
+  max-width: 1200px; /* Maximum width of content */
+  margin: 0 auto; /* Center container horizontally */
+  padding: 0 20px; /* Horizontal padding */
+  width: 100%; /* Full width up to max-width */
+}
+
+/* Main content area */
+main {
+  flex: 1; /* Take remaining space between header and footer */
+  padding: 40px 0; /* Vertical padding */
+}
+
+/* ============================================
+   HEADER & NAVIGATION
+   ============================================ */
+
+/* Header background and styling */
+header {
+  background-color: #1a1a1a; /* Dark background */
+  color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Navigation bar */
+.navbar {
+  padding: 1rem 0; /* Vertical padding */
+}
+
+.navbar .container {
+  display: flex; /* Flexbox layout */
+  justify-content: space-between; /* Space between logo and nav links */
+  align-items: center; /* Vertically center items */
+}
+
+/* Logo styling */
+.logo a {
+  font-size: 1.5rem; /* Larger font size */
+  font-weight: bold;
+  color: white;
+  text-decoration: none; /* Remove underline */
+  transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+.logo a:hover {
+  color: #4CAF50; /* Green color on hover */
+}
+
+/* Navigation links list */
+.nav-links {
+  display: flex; /* Horizontal layout */
+  list-style: none; /* Remove bullet points */
+  gap: 2rem; /* Space between links */
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #4CAF50; /* Green on hover */
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+
+/* Main page heading */
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #1a1a1a;
+}
+
+/* Subtitle text */
+.subtitle {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+/* ============================================
+   JERSEY GRID (HOMEPAGE)
+   ============================================ */
+
+/* Grid container for jersey cards */
+.jerseys-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsive grid */
+  gap: 2rem; /* Space between cards */
+  margin-top: 2rem;
+}
+
+/* Individual jersey card */
+.jersey-card {
+  background: white;
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Hide image overflow */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Card shadow */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth animations */
+}
+
+.jersey-card:hover {
+  transform: translateY(-5px); /* Lift card on hover */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+/* Jersey image container */
+.jersey-image {
+  width: 100%;
+  height: 300px;
+  overflow: hidden;
+  background-color: #f0f0f0; /* Placeholder background */
+}
+
+.jersey-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Cover entire container, maintain aspect ratio */
+}
+
+/* Jersey information section */
+.jersey-info {
+  padding: 1.5rem;
+}
+
+.jersey-info h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #1a1a1a;
+}
+
+.jersey-info .team {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.jersey-info .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #4CAF50; /* Green price color */
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   JERSEY DETAIL PAGE
+   ============================================ */
+
+/* Back link styling */
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: #45a049; /* Darker green on hover */
+}
+
+/* Jersey detail container */
+.jersey-detail {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Two equal columns */
+  gap: 3rem;
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Jersey detail image */
+.jersey-detail-image {
+  width: 100%;
+}
+
+.jersey-detail-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Jersey detail information */
+.jersey-detail-info h1 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.team-label {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.team-name {
+  font-size: 1.5rem;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+}
+
+.price-label {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.price-large {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: #4CAF50;
+  margin-bottom: 1rem;
+}
+
+.meta-info {
+  color: #999;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+
+/* Action buttons container */
+.actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* ============================================
+   ADD JERSEY FORM
+   ============================================ */
+
+/* Form container */
+.add-jersey-form {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px; /* Limit form width */
+  margin: 0 auto; /* Center form */
+}
+
+/* Form group (label + input) */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none; /* Remove default outline */
+  border-color: #4CAF50; /* Green border on focus */
+}
+
+.form-group small {
+  display: block;
+  margin-top: 0.5rem;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Form actions (buttons) */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.back-link-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+
+/* Base button styles */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-primary {
+  background-color: #4CAF50; /* Green background */
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #45a049; /* Darker green on hover */
+  transform: translateY(-2px); /* Slight lift */
+}
+
+.btn-secondary {
+  background-color: #666;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #555; /* Darker gray on hover */
+}
+
+/* ============================================
+   EMPTY STATE & ERROR MESSAGES
+   ============================================ */
+
+/* Empty state (no jerseys) */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Error message box */
+.error-box {
+  background-color: #ffebee; /* Light red background */
+  border: 2px solid #f44336; /* Red border */
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.error-box h3 {
+  color: #c62828; /* Dark red */
+  margin-bottom: 0.5rem;
+}
+
+.error-box ul {
+  list-style-position: inside;
+  color: #c62828;
+}
+
+.error-message {
+  text-align: center;
+  padding: 2rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+/* Footer styling */
+footer {
+  background-color: #1a1a1a;
+  color: white;
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: auto; /* Push footer to bottom */
+}
+
+footer p {
+  margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+/* Tablet and smaller screens */
+@media (max-width: 768px) {
+  .jersey-detail {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+
+  .navbar .container {
+    flex-direction: column; /* Stack logo and nav vertically */
+    gap: 1rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem; /* Smaller heading on mobile */
+  }
+
+  .jerseys-grid {
+    grid-template-columns: 1fr; /* Single column on mobile */
+  }
+
+  .form-actions {
+    flex-direction: column; /* Stack buttons vertically */
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}
+
+/* Mobile screens */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px; /* Less padding on mobile */
+  }
+
+  main {
+    padding: 20px 0;
+  }
+
+  .add-jersey-form {
+    padding: 1.5rem;
+  }
+}
+

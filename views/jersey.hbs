@@ -1,0 +1,58 @@
+{{!--
+views/jersey.hbs - Jersey Detail Page Template
+
+This template displays detailed information about a single jersey.
+It receives the 'jersey' object from the route handler and displays all its properties.
+--}}
+
+{{!-- Back to home link --}}
+<a href="/" class="back-link">← Back to Home</a>
+
+{{!-- Check if jersey exists (should always exist, but safety check) --}}
+{{#if jersey}}
+{{!-- Jersey detail container --}}
+<div class="jersey-detail">
+    {{!-- Left side: Jersey image --}}
+    <div class="jersey-detail-image">
+        {{#if jersey.imageUrl}}
+        <img src="{{jersey.imageUrl}}" alt="{{jersey.name}}"
+            onerror="this.src='https://via.placeholder.com/500x600?text=No+Image'">
+        {{else}}
+        <img src="https://via.placeholder.com/500x600?text=No+Image" alt="{{jersey.name}}">
+        {{/if}}
+    </div>
+
+    {{!-- Right side: Jersey information --}}
+    <div class="jersey-detail-info">
+        {{!-- Jersey name (main heading) --}}
+        <h1>{{jersey.name}}</h1>
+
+        {{!-- Team name --}}
+        <p class="team-label">Team</p>
+        <h2 class="team-name">{{jersey.team}}</h2>
+
+        {{!-- Price --}}
+        <p class="price-label">Price</p>
+        <p class="price-large">${{jersey.price}}</p>
+
+        {{!-- Additional information (if timestamps are enabled) --}}
+        {{#if jersey.createdAt}}
+        <p class="meta-info">
+            Added on {{formatDate jersey.createdAt}}
+        </p>
+        {{/if}}
+
+        {{!-- Action buttons --}}
+        <div class="actions">
+            <a href="/" class="btn btn-secondary">Back to Store</a>
+            <a href="/add" class="btn btn-primary">Add Another Jersey</a>
+        </div>
+    </div>
+</div>
+{{else}}
+{{!-- Error message if jersey not found (shouldn't happen, but safety check) --}}
+<div class="error-message">
+    <p>Jersey not found.</p>
+    <a href="/" class="btn btn-primary">Go to Homepage</a>
+</div>
+{{/if}}
